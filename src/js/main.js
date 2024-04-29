@@ -4,6 +4,7 @@ const btnSearch = document.querySelector(".js-btn-search");
 const inputForm = document.querySelector(".js-input");
 const ul = document.querySelector(".js-ul");
 const ulFav = document.querySelector(".js-ul-fav");
+const btnReset = document.querySelector(".js-btn-reset");
 // ev. local
 let cocktailsData = [];
 let cocktailsFav = [];
@@ -24,10 +25,11 @@ const init = () => {
 function renderOneCocktail(eachCocktail) {
   let oneCocktail = "";
 
-  const indexOfFav = cocktailsFav.findIndex( //para encontrar si un elemento está en ambos arrays
+  const indexOfFav = cocktailsFav.findIndex(
+    //para encontrar si un elemento está en ambos arrays
     (item) => item.idDrink === eachCocktail.idDrink
-  ); 
-  let classScss = indexOfFav === -1 ? '' : 'fav';
+  );
+  let classScss = indexOfFav === -1 ? "" : "fav";
 
   oneCocktail = `    <li class="card js-item ${classScss} mini" id="${eachCocktail.idDrink}">
       <p>${eachCocktail.strDrink}</p>
@@ -62,12 +64,12 @@ function getApi(input) {
     });
 }
 //function cargar favoritos
-function getStoredFavs(){
-    const localCocktailsFav = localStorage.getItem('favourites');
-    if(localCocktailsFav !== null){
-        cocktailsFav = JSON.parse(localCocktailsFav);
-    }
-    renderAllCocktails(ulFav, cocktailsFav);
+function getStoredFavs() {
+  const localCocktailsFav = localStorage.getItem("favourites");
+  if (localCocktailsFav !== null) {
+    cocktailsFav = JSON.parse(localCocktailsFav);
+  }
+  renderAllCocktails(ulFav, cocktailsFav);
 }
 
 //FAVORITOS
@@ -96,7 +98,7 @@ function handleFav(ev) {
   renderAllCocktails(ulFav, cocktailsFav);
 
   //Guardar en el localStorage
-  localStorage.setItem('favourites', JSON.stringify(cocktailsFav));
+  localStorage.setItem("favourites", JSON.stringify(cocktailsFav));
 }
 const handleSearch = (ev) => {
   ev.preventDefault();
@@ -107,6 +109,15 @@ const handleSearch = (ev) => {
 
 btnSearch.addEventListener("click", handleSearch);
 
+const handleReset = (ev) => {
+ul.innerHTML = "";
+ulFav.innerHTML = "";
+cocktailsFav = [];
+localStorage.removeItem('favourites');
+};
+
+btnReset.addEventListener("click", handleReset);
 //Cuando se carga la página
-init();
+
+//init(); //Preguntar si esto hace falta?
 getStoredFavs();
