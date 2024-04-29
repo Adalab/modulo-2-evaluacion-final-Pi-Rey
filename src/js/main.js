@@ -33,7 +33,7 @@ function renderOneCocktail(eachCocktail) {
   let classScss = indexOfFav === -1 ? "" : "fav";
 
   oneCocktail = `    <li class="card js-item ${classScss} mini" id="${eachCocktail.idDrink}">
-  <div class="close js-close"> x </div>
+  <div class="close hidden js-close"> x </div>
       <p>${eachCocktail.strDrink}</p>
       <img class="card--img"
         src="${eachCocktail.strDrinkThumb}"
@@ -146,7 +146,8 @@ const handleReset = (ev) => {
 };
 
 btnReset.addEventListener("click", handleReset);
+
 //Cuando se carga la página
 
-//init(); //Preguntar si esto hace falta?
+init(); 
 getStoredFavs();
