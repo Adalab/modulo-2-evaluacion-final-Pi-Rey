@@ -1,5 +1,5 @@
 /*@import 'core/variables';
-@import 'core/reset';
+
 @import 'components/code';
 @import 'components/links';
 @import 'layout/page';
@@ -7,4 +7,13 @@
 @import 'layout/footer';
 @import 'pages/index';
 */
+@import "core/reset";
 
+.card {
+  border: 2px solid black;
+  display: inline-block;
+  padding: 15px;
+  &--img {
+    width: 200px;
+  }
+}
