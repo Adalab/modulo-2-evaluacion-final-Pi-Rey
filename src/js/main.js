@@ -76,9 +76,11 @@ function getStoredFavs() {
 
 //Borrar favorito individual
 function getClose(target) {
+    
   console.log("tengo el close?");
   console.log(target);
   if (target.classList.contains("close")) {
+    
     const parentElement = target.parentElement;
     console.log("es su parentElement?");
     console.log(parentElement.id);
@@ -92,12 +94,14 @@ function getClose(target) {
     if (indexToRemove !== -1) {
       cocktailsFav.splice(indexToRemove, 1);
     }
+
     renderAllCocktails(ulFav, cocktailsFav);
   }
 }
 
 //FAVORITOS
 function handleFav(ev) {
+   
   const idSelectedCocktail = ev.currentTarget.id;
 
   //console.log(idSelectedCocktail);
@@ -111,14 +115,17 @@ function handleFav(ev) {
     (item) => item.idDrink === idSelectedCocktail
   );
   if (favoriteIndex === -1) {
+    
     cocktailsFav.push(selectedCocktail);
   } else {
     cocktailsFav.splice(favoriteIndex, 1);
+    
   }
 
   console.log("cocktailsFav: ");
   console.log(cocktailsFav);
   getClose(ev.target);
+  
   renderAllCocktails(ul, cocktailsData);
   renderAllCocktails(ulFav, cocktailsFav);
 
