@@ -10,10 +10,34 @@
 @import "core/variables";
 @import "layout/header";
 
+.main {
+  padding: 5px;
+  @media screen and (width >= 768px) {
+    padding: 20px;
+  }
+}
+.h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.input {
+  font-size: 16px;
+}
+.button {
+  font-size: 16px;
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: $sweet-pink;
+  cursor: pointer;
+  &:hover{
+    box-shadow: 4px 4px 1px 1px rgb(0 0 0 / 30%);
+  }
+}
+
 .section {
   display: flex;
   gap: 5px;
-  justify-content: flex-start; //No sé si sirve de algo
+  justify-content: flex-start;
   @media screen and (width >= 768px) {
     gap: 20px;
   }
@@ -61,7 +85,7 @@
 }
 
 .close {
-  border: 1px solid black;
+  border: 1px solid $mint-green;
   background-color: $sweet-pink;
   font-weight: bold;
   width: fit-content;
@@ -99,12 +123,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     .mini {
       .title {
         background-color: white;
-        text-align: start;
+        //text-align: start;
         padding-left: 2px;
       }
+      overflow: hidden;
       background-image: none;
       background-color: white;
       width: 125px;
@@ -112,10 +138,11 @@
       font-weight: normal;
       text-transform: none;
       padding: 0px;
-      padding-top: 5px;
+      //padding-top: 5px;
       text-align: center;
       position: relative;
       font-size: 16px;
+      cursor: default;
       &:hover {
         box-shadow: 4px 4px 1px 1px rgb(0 0 0 / 30%);
       }
@@ -126,8 +153,8 @@
         background-image: url(../images/alcoholic-drinks.png);
       }
       .hidden {
-        display: inline-block;
-        position: absolute;
+        display: block;
+
         top: 0;
         right: 0;
       }
