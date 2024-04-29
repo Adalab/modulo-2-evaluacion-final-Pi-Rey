@@ -36,7 +36,7 @@ function renderOneCocktail(eachCocktail) {
   <div class="close hidden js-close"> x </div>
       <p class="title">${eachCocktail.strDrink}</p>
       <img class="card--img"
-        src="${eachCocktail.strDrinkThumb}"
+        src="#"
         alt="${eachCocktail.strDrink}"
       />
     </li>`;

@@ -29,7 +29,7 @@
   margin-bottom: 10px;
   background-color: $sweet-pink;
   cursor: pointer;
-  &:hover{
+  &:hover {
     box-shadow: 4px 4px 1px 1px rgb(0 0 0 / 30%);
   }
 }
@@ -73,6 +73,8 @@
     width: 100px;
     height: 100px;
     background-image: url(../images/alcoholic-drinks.png);
+    background-size: 100% 100%;
+    //background-position: center;
     @media screen and (width >= 768px) {
       width: 200px;
       height: 200px;
@@ -103,7 +105,7 @@
   .title {
     background-color: $mint-green;
   }
-  //text-transform: uppercase;
+
 }
 
 .aside {
