@@ -34,7 +34,7 @@ function renderOneCocktail(eachCocktail) {
 
   oneCocktail = `    <li class="card js-item ${classScss} mini" id="${eachCocktail.idDrink}">
   <div class="close hidden js-close"> x </div>
-      <p>${eachCocktail.strDrink}</p>
+      <p class="title">${eachCocktail.strDrink}</p>
       <img class="card--img"
         src="${eachCocktail.strDrinkThumb}"
         alt="${eachCocktail.strDrink}"

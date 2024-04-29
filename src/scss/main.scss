@@ -7,19 +7,23 @@
 @import 'pages/index';
 */
 @import "core/reset";
-@import 'core/variables';
+@import "core/variables";
 @import "layout/header";
 
 .section {
   display: flex;
   gap: 5px;
-  justify-content: center; //No sé si sirve de algo
+  justify-content: flex-start; //No sé si sirve de algo
   @media screen and (width >= 768px) {
     gap: 20px;
   }
 }
 .result {
   width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
 }
 .card {
   border: 2px solid black;
@@ -29,19 +33,26 @@
   height: 200px;
   text-align: center;
   cursor: pointer;
+  margin: 5px;
+  &:hover {
+    box-shadow: 9px 9px 5px 3px rgb(0 0 0 / 48%);
+  }
   @media screen and (width >= 768px) {
     padding: 15px;
     width: 300px;
     height: 300px;
+    margin: 10px;
+    font-size: 20px;
   }
   &--img {
+    margin-top: 10px;
     width: 100px;
     height: 100px;
     background-image: url(../images/alcoholic-drinks.png);
     @media screen and (width >= 768px) {
-        width: 200px;
-        height: 200px;
-      }
+      width: 200px;
+      height: 200px;
+    }
   }
 
   .hidden {
@@ -50,7 +61,9 @@
 }
 
 .close {
-  border: 2px solid black;
+  border: 1px solid black;
+  background-color: $sweet-pink;
+  font-weight: bold;
   width: fit-content;
   padding: 2px 4px;
   margin-left: auto;
@@ -61,16 +74,24 @@
   background-image: url(../images/hearts.jpg);
   background-position: center;
   background-size: cover;
-  color: purple;
+  color: $dark-purple;
   font-weight: bold;
-  text-transform: uppercase;
+  .title {
+    background-color: $mint-green;
+  }
+  //text-transform: uppercase;
 }
 
 .aside {
-background-color: $mint-green;
-height: 100vh;
-  .title {
-
+  background-color: $mint-green;
+  min-height: 100vh;
+  height: fit-content;
+  &--title {
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: $sweet-pink;
+    padding: 5px 0;
+    text-align: center;
   }
   .ul {
     height: 100%;
@@ -79,6 +100,11 @@ height: 100vh;
     flex-direction: column;
     align-items: center;
     .mini {
+      .title {
+        background-color: white;
+        text-align: start;
+        padding-left: 2px;
+      }
       background-image: none;
       background-color: white;
       width: 125px;
@@ -89,7 +115,11 @@ height: 100vh;
       padding-top: 5px;
       text-align: center;
       position: relative;
-      
+      font-size: 16px;
+      &:hover {
+        box-shadow: 4px 4px 1px 1px rgb(0 0 0 / 30%);
+      }
+
       img {
         width: 50px;
         height: 50px;
@@ -100,7 +130,6 @@ height: 100vh;
         position: absolute;
         top: 0;
         right: 0;
-    
       }
     }
   }
