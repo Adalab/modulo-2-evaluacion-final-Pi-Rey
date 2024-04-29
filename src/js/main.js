@@ -15,7 +15,7 @@ const init = () => {
     .then((data) => {
       cocktailsData = data.drinks;
       console.log(cocktailsData);
-      renderAllCocktails(cocktailsData);
+      renderAllCocktails(ul, cocktailsData);
     });
 };
 
@@ -29,7 +29,7 @@ function renderOneCocktail(eachCocktail) {
   ); 
   let classScss = indexOfFav === -1 ? '' : 'fav';
 
-  oneCocktail = `    <li class="card js-item ${classScss}" id="${eachCocktail.idDrink}">
+  oneCocktail = `    <li class="card js-item ${classScss} mini" id="${eachCocktail.idDrink}">
       <p>${eachCocktail.strDrink}</p>
       <img class="card--img"
         src="${eachCocktail.strDrinkThumb}"
@@ -39,10 +39,10 @@ function renderOneCocktail(eachCocktail) {
   return oneCocktail;
 }
 
-function renderAllCocktails(arr) {
-  ul.innerHTML = "";
+function renderAllCocktails(html, arr) {
+  html.innerHTML = "";
   for (const drink of arr) {
-    ul.innerHTML += renderOneCocktail(drink);
+    html.innerHTML += renderOneCocktail(drink);
   }
   const allCocktailsLi = document.querySelectorAll(".js-item"); //Crear el array de items
   for (const item of allCocktailsLi) {
@@ -58,8 +58,16 @@ function getApi(input) {
     .then((data) => {
       cocktailsData = data.drinks;
       console.log(cocktailsData);
-      renderAllCocktails(cocktailsData);
+      renderAllCocktails(ul, cocktailsData);
     });
+}
+//function cargar favoritos
+function getStoredFavs(){
+    const localCocktailsFav = localStorage.getItem('favourites');
+    if(localCocktailsFav !== null){
+        cocktailsFav = JSON.parse(localCocktailsFav);
+    }
+    renderAllCocktails(ulFav, cocktailsFav);
 }
 
 //FAVORITOS
@@ -84,7 +92,11 @@ function handleFav(ev) {
   console.log("cocktailsFav: ");
   console.log(cocktailsFav);
 
-  renderAllCocktails(cocktailsData);
+  renderAllCocktails(ul, cocktailsData);
+  renderAllCocktails(ulFav, cocktailsFav);
+
+  //Guardar en el localStorage
+  localStorage.setItem('favourites', JSON.stringify(cocktailsFav));
 }
 const handleSearch = (ev) => {
   ev.preventDefault();
@@ -97,3 +109,4 @@ btnSearch.addEventListener("click", handleSearch);
 
 //Cuando se carga la página
 init();
+getStoredFavs();

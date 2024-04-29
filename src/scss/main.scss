@@ -15,6 +15,7 @@
   padding: 15px;
   width: 300px;
   height: 300px;
+  text-align: center;
   &--img {
     width: 200px;
     height: 200px;
@@ -22,15 +23,34 @@
   }
 }
 
-.hidden{
-    display: none;
+.hidden {
+  display: none;
 }
 
-.fav{
-    background-image: url(../images/hearts.jpg);
-    background-position: center;
-    background-size: cover;
-    color: purple;
-    font-weight: bold;
-    text-transform: uppercase;
+.fav {
+  background-image: url(../images/hearts.jpg);
+  background-position: center;
+  background-size: cover;
+  color: purple;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.aside {
+  .ul {
+    .mini {
+      background-image: none;
+      width: 125px;
+      height: 125px;
+      font-weight: normal;
+      text-transform: none;
+      padding: 0px;
+      text-align: center;
+      img {
+        width: 50px;
+        height: 50px;
+        background-image: url(../images/alcoholic-drinks.png);
+      }
+    }
+  }
 }
