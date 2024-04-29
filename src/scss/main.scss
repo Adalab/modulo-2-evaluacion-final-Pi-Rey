@@ -21,11 +21,18 @@
     height: 200px;
     background-image: url(../images/alcoholic-drinks.png);
   }
-}
-
-.hidden {
+  .hidden {
   display: none;
 }
+}
+
+.close{
+    border: 2px solid black;
+    width: fit-content;
+    padding: 2px 4px;
+    margin-left: auto;
+}
+
 
 .fav {
   background-image: url(../images/hearts.jpg);

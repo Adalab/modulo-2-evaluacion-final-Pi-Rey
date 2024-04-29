@@ -5,6 +5,7 @@ const inputForm = document.querySelector(".js-input");
 const ul = document.querySelector(".js-ul");
 const ulFav = document.querySelector(".js-ul-fav");
 const btnReset = document.querySelector(".js-btn-reset");
+const btnCloseDiv = document.querySelectorAll(".js-close");
 // ev. local
 let cocktailsData = [];
 let cocktailsFav = [];
@@ -15,7 +16,7 @@ const init = () => {
     .then((response) => response.json())
     .then((data) => {
       cocktailsData = data.drinks;
-      console.log(cocktailsData);
+      //console.log(cocktailsData);
       renderAllCocktails(ul, cocktailsData);
     });
 };
@@ -32,6 +33,7 @@ function renderOneCocktail(eachCocktail) {
   let classScss = indexOfFav === -1 ? "" : "fav";
 
   oneCocktail = `    <li class="card js-item ${classScss} mini" id="${eachCocktail.idDrink}">
+  <div class="close js-close"> x </div>
       <p>${eachCocktail.strDrink}</p>
       <img class="card--img"
         src="${eachCocktail.strDrinkThumb}"
@@ -59,7 +61,7 @@ function getApi(input) {
     .then((response) => response.json())
     .then((data) => {
       cocktailsData = data.drinks;
-      console.log(cocktailsData);
+      //console.log(cocktailsData);
       renderAllCocktails(ul, cocktailsData);
     });
 }
@@ -72,16 +74,39 @@ function getStoredFavs() {
   renderAllCocktails(ulFav, cocktailsFav);
 }
 
+//Borrar favorito individual
+function getClose(target) {
+  console.log("tengo el close?");
+  console.log(target);
+  if (target.classList.contains("close")) {
+    const parentElement = target.parentElement;
+    console.log("es su parentElement?");
+    console.log(parentElement.id);
+
+    // Obtener el ID del cocktail a eliminar
+    const idToRemove = parentElement.id;
+    const indexToRemove = cocktailsFav.findIndex(
+      (item) => item.idDrink === idToRemove
+    );
+    // Si se encuentra el cocktail en el array de favoritos, eliminarlo
+    if (indexToRemove !== -1) {
+      cocktailsFav.splice(indexToRemove, 1);
+    }
+    renderAllCocktails(ulFav, cocktailsFav);
+  }
+}
+
 //FAVORITOS
 function handleFav(ev) {
   const idSelectedCocktail = ev.currentTarget.id;
-  console.log(idSelectedCocktail);
+
+  //console.log(idSelectedCocktail);
   const selectedCocktail = cocktailsData.find(
     (item) => item.idDrink === idSelectedCocktail
   );
-  console.log("selectedCocktail: ");
-  console.log(selectedCocktail);
-  //verificar si la paleta clickada existe ya como fav
+  //console.log("selectedCocktail: ");
+  //console.log(selectedCocktail);
+  //verificar si la bebida clickada existe ya como fav
   const favoriteIndex = cocktailsFav.findIndex(
     (item) => item.idDrink === idSelectedCocktail
   );
@@ -93,27 +118,31 @@ function handleFav(ev) {
 
   console.log("cocktailsFav: ");
   console.log(cocktailsFav);
-
+  getClose(ev.target);
   renderAllCocktails(ul, cocktailsData);
   renderAllCocktails(ulFav, cocktailsFav);
+
+  //ejecutar el borrado individual
 
   //Guardar en el localStorage
   localStorage.setItem("favourites", JSON.stringify(cocktailsFav));
 }
+
+
 const handleSearch = (ev) => {
   ev.preventDefault();
   const inputValue = inputForm.value;
-  console.log(inputValue);
+  //console.log(inputValue);
   getApi(inputValue);
 };
 
 btnSearch.addEventListener("click", handleSearch);
 
 const handleReset = (ev) => {
-ul.innerHTML = "";
-ulFav.innerHTML = "";
-cocktailsFav = [];
-localStorage.removeItem('favourites');
+  ul.innerHTML = "";
+  ulFav.innerHTML = "";
+  cocktailsFav = [];
+  localStorage.removeItem("favourites");
 };
 
 btnReset.addEventListener("click", handleReset);
