@@ -1,13 +1,35 @@
 <main class="main">
-    <h2 class="h2">Buscador de cócteles:</h2>
-    <form class="form">
-      <input class="js-input input" type="text" placeholder="Ej. margarita"/>
-      <input class="js-btn-search button" type="submit" name="" id="" value="Buscar" />
-      <button class="js-btn-reset button">Reset</button>
-    </form>
-    <section class="section">
-      <load src="partials/aside.html" />
-      <load src="partials/list.html" />
-  
-    </section>
-  </main>
+  <div class="main--div">
+    <h2 class="main--div__h2">Buscador de cócteles:</h2>
+    <h3 class="main--div__h3 js-btn-help">Ayuda</h3>
+    <p class="main--div__info hidden js-info">
+      Para <span class="special">buscar cócteles</span> utiliza el buscador.
+      <br />
+      Para <span class="special">guardar en favoritos</span> clicka sobre las
+      bebidas del menú de la derecha.
+      <br />
+      Para <span class="special">eliminar de favoritos</span> vuelve a clickar
+      sobre las bebidas en el menú de la derecha o sobre la "x" de la lista de
+      favoritos. <br />
+      Para <span class="special">vaciar</span> toda la lista de favoritos y
+      volver al inicio, clicka sobre el botón "Reset". <br />
+      <span class="special">Haz click sobre este menú para cerrarlo.</span>
+    </p>
+  </div>
+
+  <form class="form">
+    <input class="js-input input" type="text" placeholder="Ej. margarita" />
+    <input
+      class="js-btn-search button"
+      type="submit"
+      name=""
+      id=""
+      value="Buscar"
+    />
+    <button class="js-btn-reset button">Reset</button>
+  </form>
+  <section class="section">
+    <load src="partials/aside.html" />
+    <load src="partials/list.html" />
+  </section>
+</main>

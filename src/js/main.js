@@ -5,8 +5,9 @@ const inputForm = document.querySelector(".js-input");
 const ul = document.querySelector(".js-ul");
 const ulFav = document.querySelector(".js-ul-fav");
 const btnReset = document.querySelector(".js-btn-reset");
+const btnHelp = document.querySelector(".js-btn-help");
+const info = document.querySelector(".js-info");
 
-// ev. local
 let cocktailsData = [];
 let cocktailsFav = [];
 
@@ -23,7 +24,7 @@ const init = () => {
 
 //USAR EL BUSCADOR
 //render
-function renderOneCocktail(eachCocktail,isFav) {
+function renderOneCocktail(eachCocktail, isFav) {
   let oneCocktail = "";
 
   const indexOfFav = cocktailsFav.findIndex(
@@ -34,7 +35,7 @@ function renderOneCocktail(eachCocktail,isFav) {
   let cross =
     indexOfFav === -1 ? "" : `  <div class="close hidden js-close"> x </div>`;
   //let classJS = indexOfFav !== -1 ? "js-item" : "";
-let classJS = isFav === true ? "" : "js-item";
+  let classJS = isFav === true ? "" : "js-item";
 
   oneCocktail = `    <li class="card ${classJS} ${classScss} mini" id="${eachCocktail.idDrink}">
   ${cross}
@@ -99,11 +100,11 @@ function removeFav(target) {
   }
 }
 
-function clickInClose (){
-    const btnCloseDiv = document.querySelectorAll(".js-close");
-    for (const cross of btnCloseDiv) {
-      cross.addEventListener("click", getClose); //Escuchar el evento
-    }
+function clickInClose() {
+  const btnCloseDiv = document.querySelectorAll(".js-close");
+  for (const cross of btnCloseDiv) {
+    cross.addEventListener("click", getClose); //Escuchar el evento
+  }
 }
 
 //Borrar favorito individual
@@ -113,7 +114,7 @@ function getClose(ev) {
   removeFav(ev.target);
   renderAllCocktails(ulFav, cocktailsFav, true);
   renderAllCocktails(ul, cocktailsData, false);
-clickInClose();
+  clickInClose();
 }
 
 //FAVORITOS
@@ -144,7 +145,7 @@ function handleFav(ev) {
   renderAllCocktails(ulFav, cocktailsFav, true);
 
   //ejecutar el borrado individual
-clickInClose();
+  clickInClose();
   //Guardar en el localStorage
   localStorage.setItem("favourites", JSON.stringify(cocktailsFav));
 }
@@ -166,6 +167,13 @@ const handleReset = (ev) => {
 };
 
 btnReset.addEventListener("click", handleReset);
+
+//Desplegar la información de ayuda
+const handleInfo = () => {
+    info.classList.toggle('hidden');
+};
+btnHelp.addEventListener("click", handleInfo);
+info.addEventListener("click", handleInfo);
 
 //Cuando se carga la página
 
