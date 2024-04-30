@@ -5,7 +5,7 @@ const inputForm = document.querySelector(".js-input");
 const ul = document.querySelector(".js-ul");
 const ulFav = document.querySelector(".js-ul-fav");
 const btnReset = document.querySelector(".js-btn-reset");
-const btnCloseDiv = document.querySelectorAll(".js-close");
+
 // ev. local
 let cocktailsData = [];
 let cocktailsFav = [];
@@ -31,9 +31,12 @@ function renderOneCocktail(eachCocktail) {
     (item) => item.idDrink === eachCocktail.idDrink
   );
   let classScss = indexOfFav === -1 ? "" : "fav";
+  let cross =
+    indexOfFav === -1 ? "" : `  <div class="close hidden js-close"> x </div>`;
+  let classJS = indexOfFav === -1 ? "js-item" : "";
 
-  oneCocktail = `    <li class="card js-item ${classScss} mini" id="${eachCocktail.idDrink}">
-  <div class="close hidden js-close"> x </div>
+  oneCocktail = `    <li class="card ${classJS} ${classScss} mini" id="${eachCocktail.idDrink}">
+  ${cross}
       <p class="title">${eachCocktail.strDrink}</p>
       <img class="card--img"
         src="${eachCocktail.strDrinkThumb}"
@@ -74,13 +77,9 @@ function getStoredFavs() {
   renderAllCocktails(ulFav, cocktailsFav);
 }
 
-//Borrar favorito individual
-function getClose(target) {
-    
-  console.log("tengo el close?");
-  console.log(target);
+//seguir con borrar favorito individual
+function removeFav(target) {
   if (target.classList.contains("close")) {
-    
     const parentElement = target.parentElement;
     console.log("es su parentElement?");
     console.log(parentElement.id);
@@ -94,47 +93,52 @@ function getClose(target) {
     if (indexToRemove !== -1) {
       cocktailsFav.splice(indexToRemove, 1);
     }
-
-    renderAllCocktails(ulFav, cocktailsFav);
   }
+}
+
+//Borrar favorito individual
+function getClose(ev) {
+  console.log("tengo el close?");
+  console.log(ev.target);
+  removeFav(ev.target);
+  renderAllCocktails(ulFav, cocktailsFav);
 }
 
 //FAVORITOS
 function handleFav(ev) {
-   
   const idSelectedCocktail = ev.currentTarget.id;
 
   //console.log(idSelectedCocktail);
   const selectedCocktail = cocktailsData.find(
     (item) => item.idDrink === idSelectedCocktail
   );
-  //console.log("selectedCocktail: ");
-  //console.log(selectedCocktail);
+  console.log("selectedCocktail: ");
+  console.log(selectedCocktail);
   //verificar si la bebida clickada existe ya como fav
   const favoriteIndex = cocktailsFav.findIndex(
     (item) => item.idDrink === idSelectedCocktail
   );
   if (favoriteIndex === -1) {
-    
     cocktailsFav.push(selectedCocktail);
   } else {
     cocktailsFav.splice(favoriteIndex, 1);
-    
   }
 
   console.log("cocktailsFav: ");
   console.log(cocktailsFav);
-  getClose(ev.target);
-  
+  //getClose(target);
+
   renderAllCocktails(ul, cocktailsData);
   renderAllCocktails(ulFav, cocktailsFav);
 
   //ejecutar el borrado individual
-
+  const btnCloseDiv = document.querySelectorAll(".js-close");
+  for (const cross of btnCloseDiv) {
+    cross.addEventListener("click", getClose); //Escuchar el evento
+  }
   //Guardar en el localStorage
   localStorage.setItem("favourites", JSON.stringify(cocktailsFav));
 }
-
 
 const handleSearch = (ev) => {
   ev.preventDefault();
@@ -156,5 +160,5 @@ btnReset.addEventListener("click", handleReset);
 
 //Cuando se carga la página
 
-init(); 
+init();
 getStoredFavs();
