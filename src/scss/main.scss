@@ -1,14 +1,7 @@
-/*
-@import 'components/code';
-@import 'components/links';
-@import 'layout/page';
-@import 'layout/header';
-@import 'layout/footer';
-@import 'pages/index';
-*/
 @import "core/reset";
 @import "core/variables";
 @import "layout/header";
+@import 'layout/footer';
 
 .main {
   padding: 5px;
@@ -119,7 +112,7 @@
   }
   .ul {
     height: 100%;
-    min-width: 150px;
+    min-width: 155px;
     display: flex;
     flex-direction: column;
     align-items: center;
