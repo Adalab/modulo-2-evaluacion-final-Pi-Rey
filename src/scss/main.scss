@@ -96,19 +96,20 @@
   .title {
     background-color: $mint-green;
   }
-  //text-transform: uppercase;
 }
 
 .aside {
   background-color: $mint-green;
   min-height: 100vh;
   height: fit-content;
+  margin-top: 10px;
   &--title {
     text-transform: uppercase;
     font-weight: bold;
     background-color: $sweet-pink;
     padding: 5px 0;
     text-align: center;
+
   }
   .ul {
     height: 100%;
