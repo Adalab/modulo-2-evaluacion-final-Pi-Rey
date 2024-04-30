@@ -1,7 +1,7 @@
 @import "core/reset";
 @import "core/variables";
 @import "layout/header";
-@import 'layout/footer';
+@import "layout/footer";
 
 .main {
   padding: 5px;
@@ -22,7 +22,7 @@
   margin-bottom: 10px;
   background-color: $sweet-pink;
   cursor: pointer;
-  &:hover{
+  &:hover {
     box-shadow: 4px 4px 1px 1px rgb(0 0 0 / 30%);
   }
 }
@@ -61,11 +61,26 @@
     margin: 10px;
     font-size: 20px;
   }
+  .divImg {
+
+    width: 100px;
+    height: 100px;
+    margin: auto;
+
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../images/alcoholic-drinks.png);
+    @media screen and (width >= 768px) {
+        width: 200px;
+        height: 200px;
+      }
+  }
   &--img {
     margin-top: 10px;
     width: 100px;
     height: 100px;
-    background-image: url(../images/alcoholic-drinks.png);
+
     @media screen and (width >= 768px) {
       width: 200px;
       height: 200px;
@@ -109,7 +124,6 @@
     background-color: $sweet-pink;
     padding: 5px 0;
     text-align: center;
-
   }
   .ul {
     height: 100%;
@@ -140,11 +154,18 @@
       &:hover {
         box-shadow: 4px 4px 1px 1px rgb(0 0 0 / 30%);
       }
-
+      .divImg {
+        margin: auto;
+        width: 50px;
+        height: 50px;
+        background-size: 60% 60%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(../images/alcoholic-drinks.png);
+      }
       img {
         width: 50px;
         height: 50px;
-        background-image: url(../images/alcoholic-drinks.png);
       }
       .hidden {
         display: block;

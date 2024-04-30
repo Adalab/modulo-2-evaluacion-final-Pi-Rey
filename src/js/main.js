@@ -39,10 +39,12 @@ let classJS = isFav === true ? "" : "js-item";
   oneCocktail = `    <li class="card ${classJS} ${classScss} mini" id="${eachCocktail.idDrink}">
   ${cross}
       <p class="title">${eachCocktail.strDrink}</p>
+      <div class="divImg">
       <img class="card--img"
         src="${eachCocktail.strDrinkThumb}"
         alt="${eachCocktail.strDrink}"
       />
+      </div>
     </li>`;
   return oneCocktail;
 }
