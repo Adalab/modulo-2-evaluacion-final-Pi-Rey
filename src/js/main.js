@@ -17,13 +17,13 @@ const init = () => {
     .then((data) => {
       cocktailsData = data.drinks;
       //console.log(cocktailsData);
-      renderAllCocktails(ul, cocktailsData);
+      renderAllCocktails(ul, cocktailsData, false);
     });
 };
 
 //USAR EL BUSCADOR
 //render
-function renderOneCocktail(eachCocktail) {
+function renderOneCocktail(eachCocktail,isFav) {
   let oneCocktail = "";
 
   const indexOfFav = cocktailsFav.findIndex(
@@ -33,7 +33,8 @@ function renderOneCocktail(eachCocktail) {
   let classScss = indexOfFav === -1 ? "" : "fav";
   let cross =
     indexOfFav === -1 ? "" : `  <div class="close hidden js-close"> x </div>`;
-  let classJS = indexOfFav === -1 ? "js-item" : "";
+  //let classJS = indexOfFav !== -1 ? "js-item" : "";
+let classJS = isFav === true ? "" : "js-item";
 
   oneCocktail = `    <li class="card ${classJS} ${classScss} mini" id="${eachCocktail.idDrink}">
   ${cross}
@@ -46,10 +47,10 @@ function renderOneCocktail(eachCocktail) {
   return oneCocktail;
 }
 
-function renderAllCocktails(html, arr) {
+function renderAllCocktails(html, arr, isFav) {
   html.innerHTML = "";
   for (const drink of arr) {
-    html.innerHTML += renderOneCocktail(drink);
+    html.innerHTML += renderOneCocktail(drink, isFav);
   }
   const allCocktailsLi = document.querySelectorAll(".js-item"); //Crear el array de items
   for (const item of allCocktailsLi) {
@@ -65,7 +66,7 @@ function getApi(input) {
     .then((data) => {
       cocktailsData = data.drinks;
       //console.log(cocktailsData);
-      renderAllCocktails(ul, cocktailsData);
+      renderAllCocktails(ul, cocktailsData, false);
     });
 }
 //function cargar favoritos
@@ -74,7 +75,7 @@ function getStoredFavs() {
   if (localCocktailsFav !== null) {
     cocktailsFav = JSON.parse(localCocktailsFav);
   }
-  renderAllCocktails(ulFav, cocktailsFav);
+  renderAllCocktails(ulFav, cocktailsFav, true);
 }
 
 //seguir con borrar favorito individual
@@ -96,12 +97,21 @@ function removeFav(target) {
   }
 }
 
+function clickInClose (){
+    const btnCloseDiv = document.querySelectorAll(".js-close");
+    for (const cross of btnCloseDiv) {
+      cross.addEventListener("click", getClose); //Escuchar el evento
+    }
+}
+
 //Borrar favorito individual
 function getClose(ev) {
   console.log("tengo el close?");
   console.log(ev.target);
   removeFav(ev.target);
-  renderAllCocktails(ulFav, cocktailsFav);
+  renderAllCocktails(ulFav, cocktailsFav, true);
+  renderAllCocktails(ul, cocktailsData, false);
+clickInClose();
 }
 
 //FAVORITOS
@@ -128,14 +138,11 @@ function handleFav(ev) {
   console.log(cocktailsFav);
   //getClose(target);
 
-  renderAllCocktails(ul, cocktailsData);
-  renderAllCocktails(ulFav, cocktailsFav);
+  renderAllCocktails(ul, cocktailsData, false);
+  renderAllCocktails(ulFav, cocktailsFav, true);
 
   //ejecutar el borrado individual
-  const btnCloseDiv = document.querySelectorAll(".js-close");
-  for (const cross of btnCloseDiv) {
-    cross.addEventListener("click", getClose); //Escuchar el evento
-  }
+clickInClose();
   //Guardar en el localStorage
   localStorage.setItem("favourites", JSON.stringify(cocktailsFav));
 }
