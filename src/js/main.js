@@ -22,6 +22,19 @@ const init = () => {
     });
 };
 
+//Function condicional fruity
+const isFruity = (tag) => {
+  let fruity = "";
+  if (tag === null) {
+    fruity = "No contiene frutas";
+  } else if (tag.includes("Fruity") === true) {
+    fruity = "Sabor afrutado";
+  } else {
+    fruity = "No contiene frutas";
+  }
+  return fruity;
+};
+
 //USAR EL BUSCADOR
 //render
 function renderOneCocktail(eachCocktail, isFav) {
@@ -37,6 +50,8 @@ function renderOneCocktail(eachCocktail, isFav) {
   //let classJS = indexOfFav !== -1 ? "js-item" : "";
   let classJS = isFav === true ? "" : "js-item";
 
+  const fruity = isFruity(eachCocktail.strTags);
+
   oneCocktail = `    <li class="card ${classJS} ${classScss} mini" id="${eachCocktail.idDrink}">
   ${cross}
       <p class="title">${eachCocktail.strDrink}</p>
@@ -46,8 +61,21 @@ function renderOneCocktail(eachCocktail, isFav) {
         alt="${eachCocktail.strDrink}"
       />
       </div>
+      <p>${fruity}</p>
     </li>`;
   return oneCocktail;
+}
+
+function handleConsola(ev) {
+  console.log(ev.currentTarget);
+
+  const indexOfLi = cocktailsData.find(
+    //para encontrar si el elemento clickado está en el array
+    (item) => item.idDrink === ev.currentTarget.id
+  );
+
+  console.log(indexOfLi.strDrink);
+
 }
 
 function renderAllCocktails(html, arr, isFav) {
@@ -57,7 +85,7 @@ function renderAllCocktails(html, arr, isFav) {
   }
   const allCocktailsLi = document.querySelectorAll(".js-item"); //Crear el array de items
   for (const item of allCocktailsLi) {
-    item.addEventListener("click", handleFav); //Escuchar el evento
+    item.addEventListener("click", handleConsola); //Escuchar el evento
   }
 }
 
@@ -170,7 +198,7 @@ btnReset.addEventListener("click", handleReset);
 
 //Desplegar la información de ayuda
 const handleInfo = () => {
-    info.classList.toggle('hidden');
+  info.classList.toggle("hidden");
 };
 btnHelp.addEventListener("click", handleInfo);
 info.addEventListener("click", handleInfo);
